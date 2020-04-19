@@ -1,9 +1,11 @@
 package com.study.dyndatasource.config;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +16,7 @@ public class DynamicDataSourceConfig {
     private String primary;
 
     private Map<String,DataSourceProperties> dataSource = new HashMap<>();
+
 
     //**为了简述原理，这里提供一个路由方法
     public void router(Integer router){

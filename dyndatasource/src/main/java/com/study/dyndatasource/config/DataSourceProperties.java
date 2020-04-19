@@ -14,5 +14,4 @@ public class DataSourceProperties {
 
     private String url;
 
-
 }

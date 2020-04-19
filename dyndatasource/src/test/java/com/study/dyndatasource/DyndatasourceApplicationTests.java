@@ -1,19 +1,12 @@
 package com.study.dyndatasource;
 
-import com.study.dyndatasource.config.DynamicDataSourceConfig;
-import com.study.dyndatasource.statics.dao.OrderDao;
 import com.study.dyndatasource.statics.entity.OrderEntity;
-import com.study.dyndatasource.statics.service.OrderService;
-import com.study.dyndatasource.statics.service.OrderServiceImpl;
 import com.study.dyndatasource.statics.service.OrderServiceStaticProxy;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.mockito.internal.matchers.Or;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
@@ -21,32 +14,11 @@ import java.util.zip.DataFormatException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@ComponentScan(basePackages = {"com.study.dyndatasource"})
 class DyndatasourceApplicationTests {
 
     @Test
     void contextLoads() {
-    }
-
-
-    @EnableConfigurationProperties({DynamicDataSourceConfig.class})
-    @Configuration
-    public static class DyndatasourceTests{
-        @Bean
-        public OrderDao orderDao(){
-            return new OrderDao();
-        }
-
-        @Bean
-        public OrderService orderService(){
-            return new OrderServiceImpl();
-        }
-
-        @Bean
-        public OrderServiceStaticProxy orderServiceStaticProxy(){
-            return new OrderServiceStaticProxy();
-        }
-
-
     }
 
     @Autowired
@@ -68,5 +40,4 @@ class DyndatasourceApplicationTests {
         System.out.println(order2.toString());
         proxy.createOrder(order2);
     }
-
 }
