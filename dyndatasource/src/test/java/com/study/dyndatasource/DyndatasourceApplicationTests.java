@@ -46,6 +46,24 @@ class DyndatasourceApplicationTests {
     private OrderService orderService;
 
     @Test
+    public void testCglig(){
+        new OrderServiceCglibProxy().getInstance(orderService.getClass());
+        OrderEntity order1 = new OrderEntity();
+        order1.setId("1");
+        order1.setCreateTime(1587818744477l);
+        order1.setOrderInfo("{订单1}");
+        System.out.println(order1.toString());
+        proxy.createOrder(order1);
+        OrderEntity order2 = new OrderEntity();
+        order2.setId("1");
+        order2.setCreateTime(1587818744478l);
+        order2.setOrderInfo("{订单2}");
+        System.out.println(order2.toString());
+        proxy.createOrder(order2);
+    }
+
+
+    @Test
     public void testAop(){
         OrderEntity order1 = new OrderEntity();
         order1.setId("1");
